@@ -28,7 +28,7 @@ import (
 	"golang.org/x/net/ipv4"
 	"golang.org/x/net/ipv6"
 
-	"github.com/prometheus/blackbox_exporter/config"
+	"github.com/prometheus/probe_exporter/config"
 )
 
 var (
@@ -104,9 +104,9 @@ func ProbeICMP(ctx context.Context, target string, module config.Module, registr
 	var data []byte
 	if module.ICMP.PayloadSize != 0 {
 		data = make([]byte, module.ICMP.PayloadSize)
-		copy(data, "Prometheus Blackbox Exporter")
+		copy(data, "Prometheus Probe Exporter")
 	} else {
-		data = []byte("Prometheus Blackbox Exporter")
+		data = []byte("Prometheus Probe Exporter")
 	}
 
 	body := &icmp.Echo{

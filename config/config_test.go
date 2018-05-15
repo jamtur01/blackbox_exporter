@@ -12,9 +12,9 @@ func TestLoadConfig(t *testing.T) {
 		C: &Config{},
 	}
 
-	err := sc.ReloadConfig("testdata/blackbox-good.yml")
+	err := sc.ReloadConfig("testdata/probe-good.yml")
 	if err != nil {
-		t.Errorf("Error loading config %v: %v", "blackbox.yml", err)
+		t.Errorf("Error loading config %v: %v", "probe.yml", err)
 	}
 }
 
@@ -27,11 +27,11 @@ func TestLoadBadConfigs(t *testing.T) {
 		ExpectedError string
 	}{
 		{
-			ConfigFile:    "testdata/blackbox-bad.yml",
+			ConfigFile:    "testdata/probe-bad.yml",
 			ExpectedError: "Error parsing config file: yaml: unmarshal errors:\n  line 50: field invalid_extra_field not found in type config.plain",
 		},
 		{
-			ConfigFile:    "testdata/blackbox-bad2.yml",
+			ConfigFile:    "testdata/probe-bad2.yml",
 			ExpectedError: "Error parsing config file: at most one of bearer_token & bearer_token_file must be configured",
 		},
 		{
@@ -56,9 +56,9 @@ func TestHideConfigSecrets(t *testing.T) {
 		C: &Config{},
 	}
 
-	err := sc.ReloadConfig("testdata/blackbox-good.yml")
+	err := sc.ReloadConfig("testdata/probe-good.yml")
 	if err != nil {
-		t.Errorf("Error loading config %v: %v", "testdata/blackbox-good.yml", err)
+		t.Errorf("Error loading config %v: %v", "testdata/probe-good.yml", err)
 	}
 
 	// String method must not reveal authentication credentials.

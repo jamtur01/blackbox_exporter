@@ -1,5 +1,5 @@
 repository:
-    path: github.com/prometheus/blackbox_exporter
+    path: github.com/prometheus/probe_exporter
 build:
     flags: -a -tags netgo
     ldflags: |
@@ -10,7 +10,7 @@ build:
         -X {{repoPath}}/vendor/github.com/prometheus/common/version.BuildDate={{date "20060102-15:04:05"}}
 tarball:
     files:
-        - blackbox.yml
+        - probe.yml
         - LICENSE
         - NOTICE
 crossbuild:

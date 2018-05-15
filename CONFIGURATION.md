@@ -1,4 +1,4 @@
-# Blackbox exporter configuration
+# Probe exporter configuration
 
 The file is written in [YAML format](http://en.wikipedia.org/wiki/YAML), defined by the scheme described below.
 Brackets indicate that a parameter is optional.

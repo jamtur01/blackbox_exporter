@@ -11,10 +11,10 @@
 -->
 ### Host operating system: output of `uname -a`
 
-### blackbox_exporter version: output of `blackbox_exporter -version`
+### probe_exporter version: output of `probe_exporter -version`
 <!-- If building from source, run `make` first. -->
 
-### What is the blackbox.yml module config.
+### What is the probe.yml module config.
 
 ### What is the prometheus.yml scrape config.
 

@@ -35,7 +35,7 @@ import (
 	pconfig "github.com/prometheus/common/config"
 	"golang.org/x/net/publicsuffix"
 
-	"github.com/prometheus/blackbox_exporter/config"
+	"github.com/prometheus/probe_exporter/config"
 )
 
 func matchRegularExpressions(reader io.Reader, httpConfig config.HTTPProbe, logger log.Logger) bool {

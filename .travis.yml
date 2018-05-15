@@ -6,7 +6,7 @@ go:
 - 1.10.x
 - 1.x
 
-go_import_path: github.com/prometheus/blackbox_exporter
+go_import_path: github.com/prometheus/probe_exporter
 
 script:
 - make

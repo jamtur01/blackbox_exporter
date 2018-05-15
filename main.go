@@ -37,8 +37,8 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 	"gopkg.in/yaml.v2"
 
-	"github.com/prometheus/blackbox_exporter/config"
-	"github.com/prometheus/blackbox_exporter/prober"
+	"github.com/prometheus/probe_exporter/config"
+	"github.com/prometheus/probe_exporter/prober"
 )
 
 var (
@@ -46,7 +46,7 @@ var (
 		C: &config.Config{},
 	}
 
-	configFile    = kingpin.Flag("config.file", "Blackbox exporter configuration file.").Default("blackbox.yml").String()
+	configFile    = kingpin.Flag("config.file", "Probe exporter configuration file.").Default("probe.yml").String()
 	listenAddress = kingpin.Flag("web.listen-address", "The address to listen on for HTTP requests.").Default(":9115").String()
 	timeoutOffset = kingpin.Flag("timeout-offset", "Offset to subtract from timeout in seconds.").Default("0.5").Float64()
 	configCheck   = kingpin.Flag("config.check", "If true validate the config file and then exit.").Default().Bool()
@@ -200,19 +200,19 @@ func DebugOutput(module *config.Module, logBuffer *bytes.Buffer, registry *prome
 }
 
 func init() {
-	prometheus.MustRegister(version.NewCollector("blackbox_exporter"))
+	prometheus.MustRegister(version.NewCollector("probe_exporter"))
 }
 
 func main() {
 	allowedLevel := promlog.AllowedLevel{}
 	flag.AddFlags(kingpin.CommandLine, &allowedLevel)
-	kingpin.Version(version.Print("blackbox_exporter"))
+	kingpin.Version(version.Print("probe_exporter"))
 	kingpin.HelpFlag.Short('h')
 	kingpin.Parse()
 	logger := promlog.New(allowedLevel)
 	rh := &resultHistory{maxResults: *historyLimit}
 
-	level.Info(logger).Log("msg", "Starting blackbox_exporter", "version", version.Info())
+	level.Info(logger).Log("msg", "Starting probe_exporter", "version", version.Info())
 	level.Info(logger).Log("msg", "Build context", version.BuildContext())
 
 	if err := sc.ReloadConfig(*configFile); err != nil {
@@ -275,9 +275,9 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
 		w.Write([]byte(`<html>
-    <head><title>Blackbox Exporter</title></head>
+    <head><title>Probe Exporter</title></head>
     <body>
-    <h1>Blackbox Exporter</h1>
+    <h1>Probe Exporter</h1>
     <p><a href="/probe?target=prometheus.io&module=http_2xx">Probe prometheus.io for http_2xx</a></p>
     <p><a href="/probe?target=prometheus.io&module=http_2xx&debug=true">Debug probe prometheus.io for http_2xx</a></p>
     <p><a href="/metrics">Metrics</a></p>
